@@ -1,5 +1,6 @@
 # Project files and folders
-/.vscode
+.vscode/
+out/
 chromedriver
 
 # Byte-compiled / optimized / DLL files
