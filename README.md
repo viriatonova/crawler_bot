@@ -21,13 +21,12 @@ Prova de conceito para web crawler e scraper
     ```text
         crawler_bot/
         ├── bot/
-        │   ├── driver/
         │   └── entity/
         ├── out/
         └── chromedriver
     ```
 - Download `Chromedriver` e coloque no diretório `root` do projeto
-- Crie e ative o ambiente virtual python e instale as dependências do projeto:
+- Crie e ative o ambiente virtual python, e, em seguida instale as dependências do projeto:
     ```bash
         $ python -m venv venv
         $ source venv/bin/activate
@@ -41,7 +40,7 @@ Prova de conceito para web crawler e scraper
     - -r : `definir região`
     - -s : `[OPICIONAL] definir formato para salvar os dados`
     ```bash
-        python main.py -r China # sem o parâmentro -s imprime na tela 
+        python main.py -r China # sem o parâmentro -s imprime os dados na tela 
         python main.py -r Brazil -s json
         python main.py -r Chile -s csv
     ```

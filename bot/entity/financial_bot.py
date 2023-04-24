@@ -4,6 +4,7 @@ import json
 import os
 
 from bs4 import BeautifulSoup
+from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver import Chrome
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
@@ -32,7 +33,7 @@ class FinancialBot:
         self._setup()
 
     def _setup(self) -> None:
-        """Metódo"""
+        """Metódo que ordena a chamada das funções de crawler e scraper"""
         self._create_folder()
         self.open_page()
         self._set_region()
@@ -48,13 +49,13 @@ class FinancialBot:
                     raise
 
     def save_as_json(self) -> None:
-        # self._create_folder()
+        """Salva os dados obtidos no formato json"""
         json_file = json.dumps(self.financial_data, indent=4)
         with open(f"{ROOT_DIR}/out/financial.json", "w+") as json_outfile:
             json_outfile.write(json_file)
 
     def save_as_csv(self) -> None:
-        # self._create_folder()
+        """Salva os dados obtidos no formato csv"""
         with open(f"{ROOT_DIR}/out/financial.csv", "w+") as csv_outfile:
             field_names = ["Symbol", "Name", "Price"]
             writer = csv.DictWriter(csv_outfile, fieldnames=field_names)
@@ -97,7 +98,7 @@ class FinancialBot:
         self._raw_stocks_table = html_source.get_attribute("innerHTML")
 
     def scrape(self) -> None:
-        """Scraping data from financial html table"""
+        """Faz o scraping dos dados na tabela obtida"""
         soup = BeautifulSoup(self._raw_stocks_table, "html.parser")
         for index, line in enumerate(soup.find_all("tr", class_="simpTblRow")):
             symbol = line.find("td", attrs={"aria-label": "Symbol"})
